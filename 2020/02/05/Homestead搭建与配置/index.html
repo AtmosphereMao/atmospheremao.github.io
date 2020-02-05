@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>AtmosphereMao Blog</title>
+  <title>Homestead搭建与配置 | AtmosphereMao Blog</title>
   
   
 
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'><span style="font-family:"><span style="color:red">A</span>tmosphere<span style="color:red">M</span>ao</span></h1>
@@ -269,24 +269,9 @@
     <div class='body-wrapper'>
       <div class='l_main'>
   
-  <section class="post-list">
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
 
 
   <section class='meta'>
@@ -295,11 +280,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
-      Laravel生产环境配置
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+        Homestead搭建与配置
+      </a>
+    </h1>
+  
 
 
       
@@ -341,6 +328,24 @@
           
             
   
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+  
 
           
         
@@ -357,220 +362,265 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li>第一步，安装虚拟机VirtualBox</li>
+<li>第二 步，下载vagrant</li>
+<li>第三步，安装完毕vagrant之后，运行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant box add laravel&#x2F;homestead</span><br></pre></td></tr></table></figure>
+此步的下载会很慢，根据上面提示的地址，用迅雷或其他下载软件下载，保证下载不会被中断，下载完成后，用以下代码完成安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant box add laravel&#x2F;homestead homestead.box</span><br></pre></td></tr></table></figure>
+如使用该方法完成安装，则需要更改版本号（默认导入box版本号为0）</li>
+</ul>
+<p>打开<strong>C:\Users\M.vagrant.d\boxes</strong>，更改box里的版本号为对应的版本。</p>
+<ul>
+<li><p>第四步，把homestead克隆到本地</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;laravel&#x2F;homestead.git ~&#x2F;Homestead</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时我们举例homestead下载到了~/Homestead文件下面</p>
+</li>
+<li><p>第五步，创建<strong>Homestead.yaml</strong>配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd  ~&#x2F;Homestead</span><br><span class="line">&#x2F;&#x2F; Mac &#x2F; Linux...</span><br><span class="line">bash init.sh</span><br><span class="line">&#x2F;&#x2F; Windows...</span><br><span class="line">init.bat</span><br></pre></td></tr></table></figure>
+<p>此时会生成一个<strong>Homestead.yaml</strong>文件就是配置文件</p>
+</li>
+</ul>
+<h2 id="Homestead-yaml-配置"><a href="#Homestead-yaml-配置" class="headerlink" title="Homestead.yaml 配置"></a>Homestead.yaml 配置</h2><ul>
+<li>虚拟机设置</li>
+</ul>
+<p>Homestead 支持我们对虚拟机的IP，内存，CPU，虚拟机的默认提供者进行配置。这里我们基本不需要做任何配置，因此可以跳过。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ip: &quot;192.168.10.10&quot;</span><br><span class="line">memory: 2048</span><br><span class="line">cpus: 1</span><br><span class="line">provider: virtualbox</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>SSH 秘钥登录配置</li>
+</ul>
+<p>authorize 选项是指派登录虚拟机授权连接的公钥文件，此文件填写的是主机上的公钥文件地址，虚拟机初始化时，此文件里的内容会被复制存储到虚拟机的<br><strong>/home/vagrant/.ssh/authorized_keys</strong> 文件中，从而实现 SSH免密码登录。在这里我们默认填写即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">authorize: ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>keys 是数组选项，填写的是本机的 SSH私钥文件地址。虚拟机初始化时，会将此处填写的所有 SSH 私钥文件复制到虚拟机的 <strong>/home/vagrant/.ssh/</strong> 文件夹中，从而使虚拟机能共享主机上的 SSH 私钥文件，使虚拟机具备等同于主机的身份认证。此功能为 SSH 授权提供了便利，例如在后面章节中，我们只需要在 GitHub 上配置一个 SSH 公钥，即可实现 GitHub 对虚拟机和主机共同认证。</p>
+<p>此处我们将公钥和私钥一起同步到虚拟机中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keys:</span><br><span class="line">    - ~&#x2F;.ssh&#x2F;id_rsa</span><br><span class="line">    - ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>共享文件夹配置</li>
+</ul>
+<p>我们可以通过 folders 来指明本机要映射到 Homestead 虚拟机上的文件夹。</p>
+<ol>
+<li><strong>map</strong> 对应的是我们本机的文件夹，格式例如：E：/Homestead/Code，以开发者实际项目目录为准。</li>
+<li><strong>to</strong> 对应的是 Homestead 上的文件夹。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">folders:</span><br><span class="line">    - map: ~&#x2F;Code</span><br><span class="line">      to: &#x2F;home&#x2F;vagrant&#x2F;Code</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>站点配置<br>站点配置允许你在主机里，通过域名来访问虚拟机里的 Laravel 应用。如下面 sites 配置所示，将 homestead.test 映射到一个 Laravel 项目的 public 目录上。这一行配置，会命令 Homestead 为我们新建一个 Nginx 站点，并且把 Web Root 配置到指定目录下。Laravel 应用的 Nginx 站点 Web Root 配置，默认就是在根目录下的 public 目录。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sites:</span><br><span class="line">    - map: homestead.test</span><br><span class="line">      to: &#x2F;home&#x2F;vagrant&#x2F;Code&#x2F;Laravel&#x2F;public</span><br></pre></td></tr></table></figure>
+<p>此处的laravle文件并不存在，需要在对应创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&#x2F;Code&#x2F;Laravel&#x2F;public</span><br></pre></td></tr></table></figure>
+
+<p>根据上面站点地址，如需本地测试，则hosts也需要修改<br>C:\Windows\System32\Drivers\etc\hosts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.10.10  homestead.test</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>数据库配置</li>
+</ul>
+<p>我们可以为 Homestead 指定数据库名称，这里使用默认设置即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">databases:</span><br><span class="line">    - homestead</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义变量</li>
+</ul>
+<p>最后，如果你需要自定义一些在虚拟机上可以使用的自定义变量，则可以在 <strong>variables</strong> 中进行定义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">variables:</span><br><span class="line">    - key: APP_ENV</span><br><span class="line">      value: local</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行-Vagrant"><a href="#运行-Vagrant" class="headerlink" title="运行 Vagrant"></a>运行 Vagrant</h3><p>完成了 Homestead 的配置，接下来我们要开始启动虚拟机了。</p>
+<p>在命令中输入 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant</span><br></pre></td></tr></table></figure>
+<p>能看到 Vagrant 为我们提供了一些便利的命令行，下面简单介绍一下 Vagrant 常用的一些命令行的使用：</p>
+<table>
+<thead>
+<tr>
+<th>命令行</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vagrant init</td>
+<td>初始化 vagrant</td>
+</tr>
+<tr>
+<td>vagrant up</td>
+<td>启动 vagrant</td>
+</tr>
+<tr>
+<td>vagrant halt</td>
+<td>关闭 vagrant</td>
+</tr>
+<tr>
+<td>vagrant ssh</td>
+<td>通过 SSH 登录 vagrant（需要先启动 vagrant）</td>
+</tr>
+<tr>
+<td>vagrant provision</td>
+<td>重新应用更改 vagrant 配置</td>
+</tr>
+<tr>
+<td>vagrant destroy</td>
+<td>删除 vagrant</td>
+</tr>
+</tbody></table>
+<p>让我们开始启动 Homestead：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; cd ~&#x2F;Homestead &amp;&amp; vagrant up</span><br></pre></td></tr></table></figure>
+<p>第一次启动时，Vagrant 会做以下这几件事情：</p>
+<ol>
+<li>以导入的 Homestead 虚拟机盒子为模板，新建一台虚拟机；</li>
+<li>并按照 Homestead.yaml 里的配置信息，对这台新建的虚拟机进行配置；</li>
+<li>配置完成后启动虚拟机。</li>
+</ol>
+<p>成功启动后，还是在 ~/Homestead 目录中，通过以下命令来 SSH 登录 Homestead 虚拟机中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; vagrant ssh</span><br></pre></td></tr></table></figure>
+
+<p>在虚拟机界面下可以输入退出虚拟机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ exit</span><br></pre></td></tr></table></figure>
+<p>最后尝试关闭 Homestead：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; vagrant halt</span><br></pre></td></tr></table></figure>
+
+      </div>
       
       
-        <div class="readmore">
-          <a href="/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-  </section>
-</article>
-
-          </div>
+        <br>
         
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
         
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/">
-      Homestead搭建与配置
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="http://yoursite.com" rel="nofollow">
-        
-          <img src="/images/avatar.png">
-        
-        <p>Atmospheremao</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-02-04T01:50:12+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-02-05</p>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年2月4日</p>
   </a>
 </div>
 
-          
+        
+      
         
           
-            
 
-          
+        
+      
         
           
-            
-  
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <div class="readmore">
-          <a href="/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
-  </section>
-</article>
-
-          </div>
-        
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/12/12/myfirstpost/">
-      Hexo 博客创建成功
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-        
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/&title=Homestead搭建与配置 | AtmosphereMao Blog&pics=/images/avatar.png&summary="
           
-            
-  <div class='new-meta-item author'>
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
     
-      <a href="http://yoursite.com" rel="nofollow">
-        
-          <img src="/images/avatar.png">
-        
-        <p>Atmospheremao</p>
-      </a>
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/&title=Homestead搭建与配置 | AtmosphereMao Blog&pics=/images/avatar.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/&title=Homestead搭建与配置 | AtmosphereMao Blog&pics=/images/avatar.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
     
   </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-12</p>
-  </a>
 </div>
 
-          
-        
-          
-            
 
-          
-        
-          
-            
-  
 
-          
         
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
       
     </div>
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
       
-        <div class="readmore">
-          <a href="/2019/12/12/myfirstpost/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-  </section>
-</article>
-
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="prev" title="Laravel生产环境配置">
+                                
+                                    Laravel生产环境配置
+                                
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2019/12/12/myfirstpost/" rel="prev" title="Hexo 博客创建成功">
+                                  
+                                      Hexo 博客创建成功
+                                  
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
           </div>
-        
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
 
   
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Homestead搭建与配置',
+      tools: true
+    }
+  </script>
 
 
 </div>
@@ -676,6 +726,25 @@
           
         
           
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Homestead-yaml-配置"><span class="toc-text">Homestead.yaml 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行-Vagrant"><span class="toc-text">运行 Vagrant</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
           
         
           
@@ -828,6 +897,46 @@
               
 
             
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
           

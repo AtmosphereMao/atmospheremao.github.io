@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>AtmosphereMao Blog</title>
+  <title>Laravel生产环境配置 | AtmosphereMao Blog</title>
   
   
 
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover  half'>
+    <cover class='cover post half'>
       
         
   <h1 class='title'><span style="font-family:"><span style="color:red">A</span>tmosphere<span style="color:red">M</span>ao</span></h1>
@@ -269,24 +269,9 @@
     <div class='body-wrapper'>
       <div class='l_main'>
   
-  <section class="post-list">
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
 
 
   <section class='meta'>
@@ -295,11 +280,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
-      Laravel生产环境配置
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        Laravel生产环境配置
+      </a>
+    </h1>
+  
 
 
       
@@ -341,6 +328,24 @@
           
             
   
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+  
 
           
         
@@ -357,220 +362,144 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <h3 id="允许使用的顶级域名"><a href="#允许使用的顶级域名" class="headerlink" title="允许使用的顶级域名"></a>允许使用的顶级域名</h3><h4 id="视图View设置"><a href="#视图View设置" class="headerlink" title="视图View设置"></a>视图View设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@if (app()-&gt;isLocal())</span><br><span class="line">    @include(&#39;sudosu::user-selector&#39;)</span><br><span class="line">@endif</span><br></pre></td></tr></table></figure>
+
+<h4 id="Config设置"><a href="#Config设置" class="headerlink" title="Config设置"></a>Config设置</h4><p>config/sudosu.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">return [</span><br><span class="line">    &#x2F;&#x2F; 允许使用的顶级域名</span><br><span class="line">    &#39;allowed_tlds&#39; &#x3D;&gt; [&#39;dev&#39;, &#39;local&#39;, &#39;test&#39;, &#39;app&#39;],</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 用户模型</span><br><span class="line">    &#39;user_model&#39; &#x3D;&gt; App\Models\User::class</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="env"><a href="#env" class="headerlink" title=".env"></a>.env</h4><p>生产环境中设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">APP_ENV&#x3D;local</span><br></pre></td></tr></table></figure>
+<p>说明现在是本地环境，而不是生产环境。app ()-&gt;isLocal () 判断是本地环境才去注册 SudoSo。<br>日后产品上线了，可以在.env 里改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">APP_ENV&#x3D;production</span><br></pre></td></tr></table></figure>
+<p>这样 isLocal () 返回 false, 生产环境里就不会引入 SudoSo 了。</p>
+
+      </div>
       
       
-        <div class="readmore">
-          <a href="/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-  </section>
-</article>
-
-          </div>
+        <br>
         
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
         
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/">
-      Homestead搭建与配置
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    
-      <a href="http://yoursite.com" rel="nofollow">
-        
-          <img src="/images/avatar.png">
-        
-        <p>Atmospheremao</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-02-04T01:29:51+08:00">
   <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-02-05</p>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2020年2月4日</p>
   </a>
 </div>
 
-          
+        
+      
         
           
-            
 
-          
+        
+      
         
           
-            
-  
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        <div class="readmore">
-          <a href="/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
-  </section>
-</article>
-
-          </div>
-        
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/12/12/myfirstpost/">
-      Hexo 博客创建成功
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-        
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/&title=Laravel生产环境配置 | AtmosphereMao Blog&pics=/images/avatar.png&summary="
           
-            
-  <div class='new-meta-item author'>
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
     
-      <a href="http://yoursite.com" rel="nofollow">
-        
-          <img src="/images/avatar.png">
-        
-        <p>Atmospheremao</p>
-      </a>
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/&title=Laravel生产环境配置 | AtmosphereMao Blog&pics=/images/avatar.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/02/05/Laravel%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/&title=Laravel生产环境配置 | AtmosphereMao Blog&pics=/images/avatar.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
     
   </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-12-12</p>
-  </a>
 </div>
 
-          
-        
-          
-            
 
-          
-        
-          
-            
-  
 
-          
         
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
       
     </div>
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
       
-        <div class="readmore">
-          <a href="/2019/12/12/myfirstpost/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-  </section>
-</article>
-
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2020/02/05/Homestead%E6%90%AD%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE/" rel="prev" title="Homestead搭建与配置">
+                                  
+                                      Homestead搭建与配置
+                                  
+                              </a>
+                          </h4>
+                          
+                      </span>
+                  </section>
+              
           </div>
-        
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
 
   
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Laravel生产环境配置',
+      tools: true
+    }
+  </script>
 
 
 </div>
@@ -676,6 +605,25 @@
           
         
           
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#允许使用的顶级域名"><span class="toc-text">允许使用的顶级域名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#视图View设置"><span class="toc-text">视图View设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Config设置"><span class="toc-text">Config设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#env"><span class="toc-text">.env</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+            
           
         
           
@@ -828,6 +776,46 @@
               
 
             
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
           
